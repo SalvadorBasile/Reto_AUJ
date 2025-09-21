@@ -5,17 +5,20 @@ API REST construida con FastAPI para gestionar usuarios con validación de email
 ## 🚀 Instalación y ejecución
 
 ### 1. Clonar el repositorio
+
 ```bash
 git clone <tu-repo-url>
 cd Reto_AUJ
 ```
 
 ### 2. Instalar dependencias
+
 ```bash
 pip install -r requirements.txt
 ```
 
 ### 3. Ejecutar la aplicación
+
 ```bash
 uvicorn main:app --reload
 ```
@@ -27,14 +30,17 @@ La API estará disponible en: `http://localhost:8000`
 ## 📋 Endpoints disponibles
 
 ### GET /users
+
 Lista todos los usuarios registrados.
 
 **Ejemplo con cURL:**
+
 ```bash
 curl -X GET "http://localhost:8000/users"
 ```
 
 **Respuesta:**
+
 ```json
 [
   {
@@ -44,7 +50,7 @@ curl -X GET "http://localhost:8000/users"
   },
   {
     "id": 2,
-    "name": "Donatto", 
+    "name": "Donatto",
     "email": "donatto@gmail.com"
   },
   {
@@ -56,17 +62,21 @@ curl -X GET "http://localhost:8000/users"
 ```
 
 ### GET /users/{id}
+
 Obtiene un usuario específico por su ID.
 
 **Ejemplo con cURL:**
+
 ```bash
 curl -X GET "http://localhost:8000/users/1"
 ```
 
 ### POST /users
+
 Crea un nuevo usuario. Requiere ID, nombre y email.
 
 **Ejemplo con cURL:**
+
 ```bash
 curl -X POST "http://localhost:8000/users" \
   -H "Content-Type: application/json" \
@@ -78,10 +88,12 @@ curl -X POST "http://localhost:8000/users" \
 ```
 
 **Ejemplo con Postman:**
+
 - **Method:** POST
 - **URL:** `http://localhost:8000/users`
 - **Headers:** `Content-Type: application/json`
 - **Body:**
+
 ```json
 {
   "id": 5,
@@ -91,6 +103,7 @@ curl -X POST "http://localhost:8000/users" \
 ```
 
 **Respuesta exitosa:**
+
 ```json
 {
   "id": 4,
@@ -100,9 +113,11 @@ curl -X POST "http://localhost:8000/users" \
 ```
 
 ### PUT /users/{id}
+
 Actualiza un usuario existente.
 
 **Ejemplo con cURL:**
+
 ```bash
 curl -X PUT "http://localhost:8000/users/1" \
   -H "Content-Type: application/json" \
@@ -113,18 +128,22 @@ curl -X PUT "http://localhost:8000/users/1" \
 ```
 
 ### DELETE /users/{id}
+
 Elimina un usuario por su ID.
 
 **Ejemplo con cURL:**
+
 ```bash
 curl -X DELETE "http://localhost:8000/users/1"
 ```
 
 **Ejemplo con Postman:**
+
 - **Method:** DELETE
 - **URL:** `http://localhost:8000/users/1`
 
 **Respuesta exitosa:**
+
 ```json
 {
   "message": "El usuario ha sido eliminado!"
@@ -154,7 +173,9 @@ Reto_AUJ/
 ## 🔧 Modelos de datos
 
 ### User
+
 Modelo completo de usuario:
+
 ```python
 {
   "id": int,
@@ -163,8 +184,10 @@ Modelo completo de usuario:
 }
 ```
 
-### UserUpdate  
+### UserUpdate
+
 Modelo para actualizaciones (sin ID):
+
 ```python
 {
   "name": str,
@@ -178,6 +201,12 @@ Modelo para actualizaciones (sin ID):
 - Se incluyen 3 usuarios de prueba al iniciar la aplicación
 - La validación de email utiliza `EmailStr` de Pydantic
 - Los endpoints están agrupados bajo el tag "users" en la documentación
+
+## Mejoras futuras
+
+- Persistencia: migrar la lista en memoria a SQLite para mantener datos entre reinicios.
+- Tests: agregar pruebas con `pytest` y `fastapi.testclient`.
+- Validaciones: evitar emails duplicados al crear usuarios.
 
 ## 👨‍💻 Desarrollado por
 
